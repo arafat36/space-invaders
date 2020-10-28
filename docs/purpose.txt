@@ -1,0 +1,2 @@
+Här inne ska vi ha en dokumentation av spelet. 
+Tex. hur den fungererar, logiken bakom, och vad som kan förbättras etc.
