@@ -56,7 +56,6 @@ class Game():
             self.clock.tick(40)
 
 
-
     def handle_events(self):
         """
         Handles the events in the game
@@ -70,12 +69,12 @@ class Game():
 
         # Handle the keypresses
         if to_left:
-            # if self.ship.left > 0:
+            # if self.ship.get_left() > 0:
             #     self.ship.move_left()
             print("Keydown LEFT")
 
         if to_right:
-            # if self.ship.right < self.screen.width:
+            # if self.ship.get_right() < self.screen.width:
             #     self.ship.move_right()
             print("Keydown RIGHT")
 
@@ -88,7 +87,7 @@ class Game():
             # Check if spacebar is pressed
             elif event.type == pg.KEYDOWN:
                 if event.key == pgloc.K_SPACE:
-                    # bullet_pos = self.ship.center
+                    # bullet_pos = self.ship.get_center()
                     # bullet_obj = Bullet(bullet_pos)
                     # self.player_bullets.add(bullet_obj)
 
@@ -171,6 +170,6 @@ class Game():
         pg.display.flip()
 
 
-
-game = Game()
-game.run_game()
+# if __name__ == '__main__':
+#     game = Game()
+#     game.run_game()
