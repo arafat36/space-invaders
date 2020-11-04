@@ -13,17 +13,17 @@ class Ship(GroupSingle):
 
         self.move_speed = 10
 
-    def get_center():
+    def get_center(self):
         return self.rect.center
 
-    def get_left():
+    def get_left(self):
         return self.rect.left
 
-    def get_right():
+    def get_right(self):
         return self.rect.right
 
-    def move_left():
+    def move_left(self):
         self.rect.move_ip(-self.move_speed, 0)
 
-    def move_right():
+    def move_right(self):
         self.rect.move_ip(self.move_speed, 0)
