@@ -1,6 +1,6 @@
 from pygame.rect import Rect
 from pygame.surface import Surface
-from pygame.mask import Mask
+from pygame.mask import from_surface
 from pygame.sprite import GroupSingle, Sprite
 
 class Ship(GroupSingle):
@@ -8,7 +8,7 @@ class Ship(GroupSingle):
         super(Ship, self).__init__()
         self.image = Surface((100, 50))
         self.rect = self.image.get_rect()
-        self.mask = Mask((self.image.get_width(), self.image.get_height()))
+        self.mask = from_surface(self.image)
         self.sprite = Sprite(self)
 
         self.move_speed = 10
