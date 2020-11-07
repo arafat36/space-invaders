@@ -10,6 +10,7 @@ from Settings import Settings
 from Ship import Ship
 from Bullet import Bullet
 from Bullets import Bullets
+from Aliens import Aliens
 
 class Game:
     """
@@ -41,12 +42,13 @@ class Game:
         # Initialize Game elements
         self.ship = Ship((self.width // 2, self.height - Settings.D_PADDING))
         self.ship_group = LayeredDirty(self.ship)
-        self.player_bullets = Bullets()
-        self.enemy_bullets = Bullets()
-        # self.aliens = Aliens()
+        self.player_bullets = Bullets(self.width, self.height)
+        self.enemy_bullets = Bullets(self.width, self.height)
+        self.aliens = Aliens(self.width)
+        self.aliens.setup_aliens()
         # self.score_board = ScoreBoard()
         # self.groups = (self.aliens, self.enemy_bullets, self.player_bullets)
-        self.groups = (self.player_bullets, self.enemy_bullets)
+        self.groups = (self.aliens, self.player_bullets, self.enemy_bullets)
        
 
     def run_game(self):
