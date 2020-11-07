@@ -8,7 +8,7 @@ from pygame.sprite import LayeredDirty
 
 from Settings import Settings
 from Ship import Ship
-from Bullet import Bullet
+from Bullet import PlayerBullet, EnemyBullet
 from Bullets import Bullets
 
 class Game:
@@ -83,12 +83,10 @@ class Game:
         if to_left:
             if self.ship.get_left() > 0:
                 self.ship.move_left()
-            # print("Keydown LEFT")
 
         if to_right:
             if self.ship.get_right() < self.width:
                 self.ship.move_right()
-            # print("Keydown RIGHT")
 
 
         # Handle events
@@ -101,12 +99,10 @@ class Game:
             elif event.type == pg.KEYDOWN:
                 if event.key == pgloc.K_SPACE:
                     bullet_pos = self.ship.get_center()
-                    # bullet_pos = self.ship.get_center()
-                    bullet_obj = Bullet(bullet_pos)
+                    bullet_obj = PlayerBullet(bullet_pos)
                     self.player_bullets.add(bullet_obj)
 
                     # print("Keydown SPACE")
-                    # pass
 
 
     def update_states(self):
@@ -141,7 +137,7 @@ class Game:
         # while len(self.aliens) < 3:
         #     shooting_alien = random.choice(self.aliens)
         #     bullet_pos = shooting_alien.center
-        #     bullet_obj = Bullet(bullet_pos, enemy=True)
+        #     bullet_obj = EnemyBullet(bullet_pos)
         #     self.enemy_bullets.add(bullet_obj)
 
 
@@ -178,7 +174,6 @@ class Game:
         # Push it to the display window
         # print(changed_areas)
         pg.display.update(changed_areas)
-        # pg.display.flip()
 
 
 if __name__ == '__main__':
