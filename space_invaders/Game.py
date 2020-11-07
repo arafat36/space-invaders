@@ -6,6 +6,7 @@ import pygame.sprite as sprite
 
 from pygame.sprite import LayeredDirty
 
+from Settings import Settings
 from Ship import Ship
 from Bullet import Bullet
 from Bullets import Bullets
@@ -22,14 +23,14 @@ class Game:
         pg.init()
         
         # Initialize display screen
-        self.width = 1024
-        self.height = 512
-        pg.display.set_caption("Space Invaders - The ULTIMATE VERSION")
+        self.width = Settings.D_WIDTH
+        self.height = Settings.D_HEIGHT
+
+        pg.display.set_caption(Settings.D_CAPTION)
         # pg.display.set_icon(surface)
         self.screen = pg.display.set_mode((self.width, self.height))
         self.bgd = pg.Surface(self.screen.get_size())
-        BLACK = (0, 0, 0)
-        self.bgd.fill(BLACK)
+        self.bgd.fill(Settings.COLORS['black'])
 
         # Initialize Game Sounds
         # self.sounds = GameSounds()
@@ -38,14 +39,14 @@ class Game:
         self.clock = pg.time.Clock()
 
         # Initialize Game elements
-        self.ship = Ship((self.width // 2, self.height - 30))
+        self.ship = Ship((self.width // 2, self.height - Settings.D_PADDING))
         self.ship_group = LayeredDirty(self.ship)
         self.player_bullets = Bullets()
-        # self.enemy_bullets = Bullets()
+        self.enemy_bullets = Bullets()
         # self.aliens = Aliens()
         # self.score_board = ScoreBoard()
         # self.groups = (self.aliens, self.enemy_bullets, self.player_bullets)
-        self.groups = (self.player_bullets,)
+        self.groups = (self.player_bullets, self.enemy_bullets)
        
 
     def run_game(self):
@@ -64,7 +65,7 @@ class Game:
             self.update_display()
 
             # Keep the FPS constant on all machines
-            self.clock.tick(60)
+            self.clock.tick(Settings.FPS)
 
 
     def handle_events(self):
@@ -93,6 +94,7 @@ class Game:
         # Handle events
         for event in pg.event.get():
             if event.type == pg.QUIT:
+                pg.quit()
                 sys.exit()
 
             # Check if spacebar is pressed
@@ -111,7 +113,6 @@ class Game:
         """
         Update and handle the states of the Aliens and the Bullets
         """
-        pass 
         # # Check for collisions
 
         # # Player bullets hitting aliens
@@ -161,7 +162,6 @@ class Game:
 
         # Erase the bullets and aliens
         for group in self.groups:
-            print(group)
             group.clear(self.screen, self.bgd)
 
         # Draw new content

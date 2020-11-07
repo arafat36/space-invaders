@@ -3,12 +3,12 @@ from space_invaders.Ship import Ship
 from pygame.rect import Rect
 from pygame.surface import Surface
 from pygame.mask import Mask
-from pygame.sprite import GroupSingle, Sprite
+from pygame.sprite import DirtySprite
 
 class TestShipClass(unittest.TestCase):
 
     def test_ship_super(self):
-        self.assertTrue(issubclass(Ship, GroupSingle), msg="Ship inherits from GroupSingle class")
+        self.assertTrue(issubclass(Ship, DirtySprite), msg="Ship inherits from GroupSingle class")
     
 
 class TestShipAttributes(unittest.TestCase):
