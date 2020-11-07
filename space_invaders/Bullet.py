@@ -1,24 +1,30 @@
+import pygame.mask
+import helpers as fn
 from pygame.sprite import DirtySprite
 from pygame.rect import Rect
 from pygame.surface import Surface
-from pygame.mask import from_surface
 
 class Bullet(DirtySprite):
-    def __init__(self, pos, enemy = False):
+    def __init__(self, pos, is_enemy=False):
         super(Bullet, self).__init__()
-        self.dirty = 2
+        self.dirty = 2  # Always dirty => always redrawn
+        # self.is_enemy = is_enemy
 
-        self.image = Surface((5, 20))
+        self.image = fn.get_scaled_image('shot.png', 5)
+        
+        self.mask = pygame.mask.from_surface(self.image)
+        
         self.rect = self.image.get_rect()
-        self.mask = from_surface(self.image)
-        self.enemy = enemy
-        self.rect.center = pos
-        self.move_speed = 15
+        # Correct the pos of the bullet depending on who is shooting
+        if is_enemy:
+            self.rect.midbottom = pos
+            self.move_speed = 5
+        else:
+            self.rect.midtop = pos
+            self.move_speed = -5
+
+
 
     def update(self):
-        if self.enemy:
             self.rect.move_ip(0, self.move_speed)
-
-        if not self.enemy:
-            self.rect.move_ip(0, -self.move_speed)
 

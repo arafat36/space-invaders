@@ -16,7 +16,7 @@ class TestShipAttributes(unittest.TestCase):
     def setUp(self):
         self.ship = Ship()
 
-    
+    # help method
     def hasattr_instance(self, obj, name, _class):
         """Checks if the obj has the named attr from given class"""
         return hasattr(obj, name) and isinstance(getattr(obj, name), _class)
@@ -33,7 +33,7 @@ class TestShipAttributes(unittest.TestCase):
                     msg="has image attr that is Surface instance")
 
     def test_mask(self):
-        mask_type = Mask((0,0))
+        mask_type = type(Mask((0,0)))
         self.assertTrue(self.hasattr_instance(self.ship, "mask", mask_type),
                     msg="has mask attr that is Mask instance")
 

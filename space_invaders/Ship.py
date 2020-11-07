@@ -1,18 +1,26 @@
+import os
+import pygame.mask
+import helpers as fn
 from pygame.rect import Rect
 from pygame.surface import Surface
-from pygame.mask import from_surface
-from pygame.sprite import GroupSingle, Sprite
+from pygame.sprite import DirtySprite
 
-class Ship(GroupSingle):
-    def __init__(self):
+class Ship(DirtySprite):
+    def __init__(self, midbottom):
         super(Ship, self).__init__()
-        self.image = Surface((100, 50))
+        
+        self.dirty = 2  # Always dirty => always redrawn
+        
+        self.image = fn.get_scaled_image('ship.png', 5)
+
         self.rect = self.image.get_rect()
-        self.mask = from_surface(self.image)
-        self.sprite = Sprite(self)
+        self.rect.midbottom = midbottom
+
+        self.mask = pygame.mask.from_surface(self.image)
 
         self.move_speed = 10
 
+    
     def get_center(self):
         return self.rect.center
 
