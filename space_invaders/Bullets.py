@@ -7,7 +7,7 @@ class Bullets(LayeredDirty):
         self.screen_width = screen_width
         self.screen_heigth = screen_heigth
     
-    
+
     def update(self):
         #check if bullet is outside the screen 
         bullets = []
