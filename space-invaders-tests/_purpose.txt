@@ -1,2 +1,0 @@
-Här inne ska vi ha tester, för att testa att alla klasser och funktioner 
-fungerar som dom ska.

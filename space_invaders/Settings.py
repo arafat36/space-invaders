@@ -34,3 +34,6 @@ class Settings:
     SHIP_START_POS = (D_WIDTH // 2, D_HEIGHT - D_PADDING)
 
 
+    ###### ScoreBoard settings ######
+
+

@@ -11,6 +11,8 @@ from Ship import Ship
 from Bullet import PlayerBullet, EnemyBullet
 from Bullets import Bullets
 from Aliens import Aliens
+from GameSounds import GameSounds
+from ScoreBoard import ScoreBoard
 
 class Game:
     """
@@ -34,7 +36,7 @@ class Game:
         self.bgd.fill(Settings.COLORS['black'])
 
         # Initialize Game Sounds
-        # self.sounds = GameSounds()
+        self.sounds = GameSounds()
 
         # Initialize a Clock instance
         self.clock = pg.time.Clock()
@@ -44,7 +46,7 @@ class Game:
         self.player_bullets = Bullets(self.width, self.height)
         self.enemy_bullets = Bullets(self.width, self.height)
         self.aliens = Aliens(self.width)
-        # self.score_board = ScoreBoard()
+        self.scoreboard = ScoreBoard()
 
         self.layered_sprites = LayeredDirty()  # Used for blitting to screen
        
@@ -102,6 +104,8 @@ class Game:
                     bullet_obj = PlayerBullet(bullet_pos)
                     self.player_bullets.add(bullet_obj)
 
+                    self.sounds.bullet_shot()
+
                 elif event.key == pgloc.K_ESCAPE:
                     pg.quit()
                     sys.exit()
@@ -115,24 +119,23 @@ class Game:
 
         # Player bullets hitting aliens
         aliens_hit = sprite.groupcollide(self.player_bullets, self.aliens, True, True, sprite.collide_mask)
-        # for __ in aliens_hit:
-        #     self.scoreboard.alien_hit()
-        #     self.sounds.alien_hit()
+        for __ in aliens_hit:
+            self.scoreboard.alien_hit()
+            self.sounds.alien_hit()
 
         # Enemy bullets hitting player
         ship_hit = sprite.spritecollideany(self.ship, self.enemy_bullets)
         if ship_hit:
-            # self.score_board.ship_hit()
-            # self.sounds.ship_hit()
+            self.scoreboard.ship_hit()
+            self.sounds.ship_hit()
             # self.aliens.at_top()
-            print("Hit by  enemy!")
               
 
-        # # Alien-ship collision
-        # ship_alien_collision = sprite.spritecollideany(self.ship.sprite, self.aliens)
-        # if ship_alien_collision:
-        #     self.score_board.ship_alien_collision()
-        #     self.sounds.ship_alien_collision()
+        # Alien-ship collision
+        ship_alien_collision = sprite.spritecollideany(self.ship, self.aliens)
+        if ship_alien_collision:
+            self.scoreboard.ship_alien_collision()
+            self.sounds.ship_alien_collision()
         #     self.aliens.at_top()
 
 
@@ -144,6 +147,8 @@ class Game:
                 bullet_pos = shooting_alien.get_center()
                 bullet_obj = EnemyBullet(bullet_pos)
                 self.enemy_bullets.add(bullet_obj)
+
+                self.sounds.bullet_shot()
 
 
         # Move the bullets and aliens
