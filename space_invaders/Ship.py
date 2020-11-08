@@ -4,14 +4,15 @@ import helpers as fn
 from pygame.rect import Rect
 from pygame.surface import Surface
 from pygame.sprite import DirtySprite
+from Settings import Settings
 
 class Ship(DirtySprite):
     def __init__(self, midbottom):
         super(Ship, self).__init__()
         
         self.dirty = 2  # Always dirty => always redrawn
-        
-        self.image = fn.get_scaled_image('ship.png', 5)
+        _image_path = os.path.join(Settings.IMAGES_DIR, "ship.png")
+        self.image = fn.get_scaled_image(_image_path, 5)
 
         self.rect = self.image.get_rect()
         self.rect.midbottom = midbottom

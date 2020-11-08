@@ -29,4 +29,10 @@ class Alien(DirtySprite):
         self.current_image_number = -self.current_image_number
         self.image = self.images[self.current_image_number]
 
+    def get_center(self):
+        return self.rect.center
+
     
+class BossAlien():
+    """ """
+    pass

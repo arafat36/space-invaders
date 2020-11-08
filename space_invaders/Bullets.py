@@ -8,7 +8,7 @@ class Bullets(LayeredDirty):
         self.screen_heigth = screen_heigth
     
 
-    def update(self):
+    def update(self, *args, **kwargs):
         #check if bullet is outside the screen 
         bullets = []
         for bullet in self.sprites():
@@ -18,6 +18,7 @@ class Bullets(LayeredDirty):
                 bullets.append(bullet)
         self.remove(bullets)
         
-        super(Bullets, self).update()
+        super(Bullets, self).update(*args, **kwargs)  ## Pass on the given arguments...
+
 
 

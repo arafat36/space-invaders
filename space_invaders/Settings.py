@@ -1,6 +1,12 @@
 import pygame.image
+import os
 
 class Settings:
+
+    ###### File folders ######
+    # File path should work no matter the OS
+    IMAGES_DIR = os.path.join("..", "images")
+    SOUNDS_DIR = os.path.join("..", "sounds")
 
     ###### Display settings ######
     D_WIDTH = 512 + 128
@@ -14,15 +20,17 @@ class Settings:
     ###### Colors ######
     COLORS = {
         'black': (0, 0, 0),
-        'blue': (0,0,255)
+        'blue': (0, 0, 255),
+        'red': (255, 0, 0)
     }
 
 
     ###### Bullet settings ######
-    bullet_dy = 10
+    bullet_dy = 12
 
 
     ###### Ship settings ######
-    ship_dx = 8
+    ship_dx = 10
+    SHIP_START_POS = (D_WIDTH // 2, D_HEIGHT - D_PADDING)
 
 
