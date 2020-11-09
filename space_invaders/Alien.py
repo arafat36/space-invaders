@@ -2,6 +2,7 @@ from pygame.sprite import DirtySprite
 from pygame.rect import Rect
 from pygame.surface import Surface
 from pygame.mask import from_surface 
+from Settings import Settings
 
 class Alien(DirtySprite):
     def __init__(self, pos, image1, image2):
@@ -12,8 +13,8 @@ class Alien(DirtySprite):
         self.rect = self.image.get_rect()
         self.mask = from_surface(image1)
         self.rect.center = pos
-        self.move_speed_x = 10
-        self.move_speed_y = 20
+        self.move_speed_x = Settings.alien_dx
+        self.move_speed_y = Settings.alien_dy
         self.direction = 1
         self.images = {1:image1, -1:image2}
         self.current_image_number = 1

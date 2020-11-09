@@ -9,8 +9,8 @@ class GameSounds():
         self._ship_hit = Sound(os.path.join(Settings.SOUNDS_DIR, "playerhurt_1.wav"))
         self._bullet_shot = Sound(os.path.join(Settings.SOUNDS_DIR, "a-shot.wav"))
         self._ship_alien_collision = Sound(os.path.join(Settings.SOUNDS_DIR, "playerhurt_2.wav"))
-        
-        self._bullet_shot.set_volume(0.65)
+
+        self._bullet_shot.set_volume(0.55)
 
 
     def alien_hit(self):

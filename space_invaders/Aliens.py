@@ -2,7 +2,7 @@ from pygame.sprite import LayeredDirty
 from Alien import Alien
 import time
 import math
-import os
+from os.path import join as path_join
 import helpers as fn
 from Settings import Settings
 
@@ -21,20 +21,20 @@ class Aliens(LayeredDirty):
         alien_gap = 70
         for row in range(6):
             for column in range(7):
-                pos = alien_gap + alien_gap * column
-                aliens_path = os.path.join(Settings.IMAGES_DIR, "aliens")
+                new_alien_pos = (alien_gap + alien_gap * column, Settings.D_PADDING + 50 * row)
+                aliens_path = path_join(Settings.IMAGES_DIR, "aliens")
                 if row <= 1:
-                    image1 = fn.get_scaled_image(os.path.join(aliens_path, "big_alien1.png"), 5)
-                    image2 = fn.get_scaled_image(os.path.join(aliens_path, "big_alien2.png"), 5)
+                    image1 = fn.get_scaled_image(path_join(aliens_path, "big_alien1.png"), 5)
+                    image2 = fn.get_scaled_image(path_join(aliens_path, "big_alien2.png"), 5)
 
                 elif row <= 3:
-                    image1 = fn.get_scaled_image(os.path.join(aliens_path, "medium_alien1.png"), 5)
-                    image2 = fn.get_scaled_image(os.path.join(aliens_path, "medium_alien2.png"), 5)
+                    image1 = fn.get_scaled_image(path_join(aliens_path, "medium_alien1.png"), 5)
+                    image2 = fn.get_scaled_image(path_join(aliens_path, "medium_alien2.png"), 5)
                 else:
-                    image1 = fn.get_scaled_image(os.path.join(aliens_path, "small_alien1.png"), 5)
-                    image2 = fn.get_scaled_image(os.path.join(aliens_path, "small_alien2.png"), 5)
+                    image1 = fn.get_scaled_image(path_join(aliens_path, "small_alien1.png"), 5)
+                    image2 = fn.get_scaled_image(path_join(aliens_path, "small_alien2.png"), 5)
 
-                self.add(Alien((alien_gap + alien_gap * column, 10 + 50 * row), image1, image2))
+                self.add(Alien(new_alien_pos, image1, image2))
                             
 
         self.last_move = time.time()
